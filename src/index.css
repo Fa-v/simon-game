@@ -52,9 +52,12 @@ body {
   grid-column: 2 / 3;
 }
 
-.green:hover {
+.playing .green:hover {
   background-color: #2ecc71;
   cursor: pointer;
+  transform: scale(1.1);
+  border-color: white;
+  box-shadow: 0, 0, 10 white
 }
 
 .red {
@@ -63,9 +66,12 @@ body {
   grid-column: 3 / 4;
 }
 
-.red:hover {
+.playing .red:hover {
   background-color: #e74c3c;
   cursor: pointer;
+  transform: scale(1.1);
+  border-color: white;
+  box-shadow: 0, 0, 10 white
 }
 
 .yellow {
@@ -74,9 +80,12 @@ body {
   grid-column: 2 / 3; 
 }
 
-.yellow:hover{
+.playing .yellow:hover{
   background-color: #f1c40f;
   cursor: pointer;
+   transform: scale(1.1);
+  border-color: white;
+  box-shadow: 0, 0, 10 white
 }
 
 .blue {
@@ -85,11 +94,16 @@ body {
   grid-column: 3 / 4;
 }
 
-.blue:hover{
+.playing .blue:hover{
   background-color: #3498db;
   cursor: pointer;
+   transform: scale(1.1);
+  border-color: white;
+  box-shadow: 0, 0, 10 white
 }
 
+
+  
 @media(max-width: 640px) {
   .grid .title {
     grid-row: 1;

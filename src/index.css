@@ -52,10 +52,9 @@ body {
   grid-column: 2 / 3;
 }
 
-.playing .green:hover {
+.green:hover {
   background-color: #2ecc71;
   cursor: pointer;
-  transform: scale(1.1);
   border-color: white;
   box-shadow: 0, 0, 10 white
 }
@@ -66,10 +65,9 @@ body {
   grid-column: 3 / 4;
 }
 
-.playing .red:hover {
+.red:hover {
   background-color: #e74c3c;
   cursor: pointer;
-  transform: scale(1.1);
   border-color: white;
   box-shadow: 0, 0, 10 white
 }
@@ -80,10 +78,9 @@ body {
   grid-column: 2 / 3; 
 }
 
-.playing .yellow:hover{
+.yellow:hover{
   background-color: #f1c40f;
   cursor: pointer;
-   transform: scale(1.1);
   border-color: white;
   box-shadow: 0, 0, 10 white
 }
@@ -94,15 +91,30 @@ body {
   grid-column: 3 / 4;
 }
 
-.playing .blue:hover{
+.blue:hover{
   background-color: #3498db;
   cursor: pointer;
-   transform: scale(1.1);
   border-color: white;
   box-shadow: 0, 0, 10 white
 }
 
+.animation {
+  animation: activeColor 700ms ease-in-out;
+}
 
+@keyframes activeColor {
+0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
   
 @media(max-width: 640px) {
   .grid .title {

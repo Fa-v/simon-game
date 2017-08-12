@@ -56,7 +56,8 @@ body {
   background-color: #2ecc71;
   cursor: pointer;
   border-color: white;
-  box-shadow: 0, 0, 10 white
+  box-shadow: 0, 0, 10 white;
+  transform: scale(0.98);
 }
 
 .red {
@@ -69,7 +70,8 @@ body {
   background-color: #e74c3c;
   cursor: pointer;
   border-color: white;
-  box-shadow: 0, 0, 10 white
+  box-shadow: 0, 0, 10 white;
+  transform: scale(0.98);
 }
 
 .yellow {
@@ -82,7 +84,8 @@ body {
   background-color: #f1c40f;
   cursor: pointer;
   border-color: white;
-  box-shadow: 0, 0, 10 white
+  box-shadow: 0, 0, 10 white;
+  transform: scale(0.98);
 }
 
 .blue {
@@ -95,20 +98,21 @@ body {
   background-color: #3498db;
   cursor: pointer;
   border-color: white;
-  box-shadow: 0, 0, 10 white
+  box-shadow: 0, 0, 10 white;
+  transform: scale(0.98);
 }
 
 .animation {
-  animation: activeColor 700ms ease-in-out;
+  animation: activeColor 500ms ease-in-out;
 }
 
 @keyframes activeColor {
-0% {
+  0% {
     transform: scale(1);
     opacity: 1;
   }
   60% {
-    transform: scale(0.9);
+    transform: scale(0.97);
     opacity: 0.8;
   }
   100% {

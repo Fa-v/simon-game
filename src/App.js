@@ -8,6 +8,7 @@ class App extends Component {
       generatedColors: [],
       strictMode: false,
       playerTurn: false,
+      gameStarted: false,
       count: 0,
       classes: ['green', 'red', 'yellow', 'blue']
     }
@@ -29,7 +30,10 @@ class App extends Component {
   }
 
   startGame() {
-     this.generateColor(); 
+    this.generateColor();
+    this.setState({
+      gameStarted: true
+    })
   }
 
   strictMode() {
@@ -154,7 +158,7 @@ class App extends Component {
   }
 
   render() {
-    const { count, classes, strictMode } = this.state;
+    const { count, classes, strictMode, gameStarted } = this.state;
 
     return (
       <div className="App">
@@ -165,7 +169,7 @@ class App extends Component {
           </div>
           <div className="buttons subitems">
             <button className="start" onClick={() => this.resetGame()}>Reset</button>
-            <button className="start" onClick={() => this.startGame()}>Start</button>
+            <button className="start" disabled={gameStarted} onClick={() => this.startGame()}>Start</button>
             <button className="strict" onClick={() => this.strictMode()}>Strict {!strictMode ? 'Off' : 'On'}</button>
           </div>
           <div className={classes[0]} onClick={() => this.handlePlayerClick('0')}></div>

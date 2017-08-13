@@ -9,8 +9,7 @@ class App extends Component {
       strictMode: false,
       playerTurn: false,
       count: 0,
-      classes: ['green', 'red', 'yellow', 'blue'],
-      init: false
+      classes: ['green', 'red', 'yellow', 'blue']
     }
     this.interval = 600;
     this.playerSequence = [];

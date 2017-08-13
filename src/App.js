@@ -9,7 +9,8 @@ class App extends Component {
       strictMode: false,
       playerTurn: false,
       count: 0,
-      classes: ['green', 'red', 'yellow', 'blue']
+      classes: ['green', 'red', 'yellow', 'blue'],
+      init: false
     }
     this.interval = 600;
     this.playerSequence = [];
@@ -29,21 +30,13 @@ class App extends Component {
   }
 
   startGame() {
-    this.generateColor();
+     this.generateColor(); 
   }
 
   strictMode() {
     this.setState((prevState) => {
       return {
         strictMode: !prevState.strictMode
-      };
-    });
-  }
-  
-  switchTurn() {
-    this.setState((prevState) => {
-      return {
-        playerTurn: !prevState.playerTurn
       };
     });
   }
@@ -56,7 +49,8 @@ class App extends Component {
     this.setState((prevState) => {
       return {
         generatedColors: prevState.generatedColors.concat(index),
-        count: prevState.generatedColors.length + 1
+        count: prevState.generatedColors.length + 1,
+        playerTurn: false
       };
     }, this.playSequence);
   }
@@ -80,8 +74,11 @@ class App extends Component {
     }, 500);
     // Off for 500ms
     setTimeout(() => {
-      this.setState({ classes: this.defaultColorClasses })
-    }, 1000); 
+      this.setState({
+        classes: this.defaultColorClasses,
+        playerTurn: true
+      });
+    }, 1000);
   }
 
   playSequence() {
@@ -90,15 +87,12 @@ class App extends Component {
       this.timer = setTimeout(() => {
         this.animateColors(generatedColors[i]);
       }, this.interval * (i + 1));
-    }
+    }; 
   }
 
   handlePlayerClick(color) {
     this.playerSequence = [...this.playerSequence, color];
     this.checkSequence();
-    this.setState({
-      playerTurn: true
-    });
     this.playSound(color);
   }
 
@@ -112,8 +106,14 @@ class App extends Component {
 
     if (!isCorrect && strictMode) {
       this.resetGame();
+      this.setState({
+        count: '!!'
+      });
     }
-    if (!isCorrect) {
+    if (!isCorrect && !strictMode) {
+      this.setState({
+        count: '!!'
+      });
       this.resetSequence();
       this.playSequence();
     }
@@ -123,6 +123,7 @@ class App extends Component {
     }
     if (isCorrect && playerHasCompletedSequence && gameIsOver) {
       this.resetGame();
+      this.handleGameOver();
     }
   }
 
@@ -131,21 +132,30 @@ class App extends Component {
   }
 
   resetGame() {
+    const { strictMode } = this.state;
     this.setState((prevState) => {
       return {
         generatedColors: [],
-        strictMode: false,
+        strictMode: strictMode ? true: false,
         playerTurn: false,
         count: 0,
         classes: ['green', 'red', 'yellow', 'blue']
       };
     });
     this.playerSequence = [];
-    this.generateColor();
+    setTimeout(() => {
+      this.generateColor();
+    }, 1000);
+  }
+
+  handleGameOver() {
+    this.setState({
+      count: 'You Won!'
+    });
   }
 
   render() {
-    const { count, classes } = this.state;
+    const { count, classes, strictMode } = this.state;
 
     return (
       <div className="App">
@@ -157,12 +167,12 @@ class App extends Component {
           <div className="buttons subitems">
             <button className="start" onClick={() => this.resetGame()}>Reset</button>
             <button className="start" onClick={() => this.startGame()}>Start</button>
-            <button className="strict" onClick={() => this.strictMode()}>Strict</button>
+            <button className="strict" onClick={() => this.strictMode()}>Strict {!strictMode ? 'Off' : 'On'}</button>
           </div>
-          <div className={classes[0]} key='0' onClick={() => this.handlePlayerClick('0')}></div>
-          <div className={classes[1]} key='1' onClick={() => this.handlePlayerClick('1')}></div>
-          <div className={classes[2]} key='2' onClick={() => this.handlePlayerClick('2')}></div>
-          <div className={classes[3]} key='3' onClick={() => this.handlePlayerClick('3')}></div>
+          <div className={classes[0]} onClick={() => this.handlePlayerClick('0')}></div>
+          <div className={classes[1]} onClick={() => this.handlePlayerClick('1')}></div>
+          <div className={classes[2]} onClick={() => this.handlePlayerClick('2')}></div>
+          <div className={classes[3]} onClick={() => this.handlePlayerClick('3')}></div>
         </div>
       </div>
     );
